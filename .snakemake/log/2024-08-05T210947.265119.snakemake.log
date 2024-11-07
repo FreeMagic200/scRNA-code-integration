@@ -1,0 +1,74 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count
+---------------------  -------
+seurat_doublet_finder        1
+seurat_integrate             1
+seurat_postQC_process        1
+seurat_qc_filter             1
+total                        4
+
+Select jobs to execute...
+
+[Mon Aug  5 21:09:47 2024]
+rule seurat_qc_filter:
+    input: data/processed/seurat/02_normalized_data.rds
+    output: data/processed/seurat/03_filtered_data.rds
+    log: logs/seurat/03_qc_filter.log
+    jobid: 3
+    reason: Missing output files: data/processed/seurat/03_filtered_data.rds
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722/.snakemake/scripts/tmphkztf99h.03_qc_filter.R
+[Mon Aug  5 21:16:10 2024]
+Finished job 3.
+1 of 4 steps (25%) done
+Select jobs to execute...
+
+[Mon Aug  5 21:16:10 2024]
+rule seurat_doublet_finder:
+    input: data/processed/seurat/03_filtered_data.rds
+    output: data/processed/seurat/04_doublet_data.rds
+    log: logs/seurat/04_doublet_finder.log
+    jobid: 2
+    reason: Missing output files: data/processed/seurat/04_doublet_data.rds; Input files updated by another job: data/processed/seurat/03_filtered_data.rds; Params have changed since last execution
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722/.snakemake/scripts/tmpc41m5e24.04_doublet_finder.R
+[Mon Aug  5 21:56:54 2024]
+Finished job 2.
+2 of 4 steps (50%) done
+Select jobs to execute...
+
+[Mon Aug  5 21:56:54 2024]
+rule seurat_postQC_process:
+    input: data/processed/seurat/04_doublet_data.rds
+    output: data/processed/seurat/05_postQC_data.rds
+    log: logs/seurat/05_postQC_process.log
+    jobid: 1
+    reason: Missing output files: data/processed/seurat/05_postQC_data.rds; Input files updated by another job: data/processed/seurat/04_doublet_data.rds
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722/.snakemake/scripts/tmpcm19nyru.05_postQC_process.R
+[Mon Aug  5 22:11:50 2024]
+Finished job 1.
+3 of 4 steps (75%) done
+Select jobs to execute...
+
+[Mon Aug  5 22:11:50 2024]
+rule seurat_integrate:
+    input: data/processed/seurat/05_postQC_data.rds
+    output: data/processed/seurat/06_integrated_data.rds
+    log: logs/seurat/06_integrate.log
+    jobid: 0
+    reason: Input files updated by another job: data/processed/seurat/05_postQC_data.rds
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722/.snakemake/scripts/tmp0o10ronc.06_integrate.R
+[Tue Aug  6 00:36:43 2024]
+Finished job 0.
+4 of 4 steps (100%) done
+Complete log: .snakemake/log/2024-08-05T210947.265119.snakemake.log

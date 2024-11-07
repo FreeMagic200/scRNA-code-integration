@@ -1,0 +1,59 @@
+# 输入数据
+input:
+  seurat: "data/raw/seurat_input.rds"
+  scanpy: "data/raw/scanpy_input.h5ad"
+
+# 输出目录
+output_dir:
+  seurat: "results/seurat"
+  scanpy: "results/scanpy"
+
+# 中间结果目录
+processed_dir:
+  seurat: "data/processed/seurat"
+  scanpy: "data/processed/scanpy"
+
+# 图表输出目录
+figures_dir:
+  seurat: "figures/seurat"
+  scanpy: "figures/scanpy"
+
+# 通用分析参数
+# QC
+qc:
+  max_nFeature_RNA: 8000
+  min_nFeature_RNA: 500
+  max_nCount_RNA: 30000
+  min_nCount_RNA: 1000
+  max_percent_mt: 5
+  max_percent_ribo: 30
+  min_num_Malat1: 3
+  max_percent_hb: 100
+  percent_doublets: 0.05
+# 高变基因
+n_var_features: 2500
+
+# 回归特征
+regress_features: ["nCount_RNA", "nFeature_RNA", "percent.mt", "percent.ribo", "G2M_score", "S_score"]
+
+# 其他通用参数
+n_pcs: 30
+resolutions: [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625, 1.75, 1.875, 2, 2.125, 2.25, 2.375, 2.5, 2.625, 2.75, 2.875, 3]
+
+# UMAP参数
+umap:
+  dims: 30
+  n_neighbors: 30
+  min_dist: 0.4
+  spread: 1
+  method: "umap-learn"
+  metric: "minkowski"
+
+# 其他参数
+threads: 1 
+random_seed: 42
+
+# 日志设置
+logging:
+  level: "INFO"
+  output: "logs/analysis.log"

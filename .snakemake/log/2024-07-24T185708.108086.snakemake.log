@@ -1,0 +1,38 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+all                     1
+seurat_read_data        1
+total                   2
+
+Select jobs to execute...
+
+[Wed Jul 24 18:57:08 2024]
+rule seurat_read_data:
+    input: data/raw/seurat_input.rds
+    output: data/processed/seurat/01_read_data.rds
+    log: logs/seurat/01_read_data.log
+    jobid: 1
+    reason: Missing output files: data/processed/seurat/01_read_data.rds
+    resources: tmpdir=/tmp
+
+[Wed Jul 24 19:03:20 2024]
+Finished job 1.
+1 of 2 steps (50%) done
+Select jobs to execute...
+
+[Wed Jul 24 19:03:20 2024]
+rule all:
+    input: data/processed/seurat/01_read_data.rds, data/processed/scanpy/01_read_data.h5ad
+    jobid: 0
+    reason: Rules with a run or shell declaration but no output are always executed.
+    resources: tmpdir=/tmp
+
+[Wed Jul 24 19:03:20 2024]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: .snakemake/log/2024-07-24T185708.108086.snakemake.log

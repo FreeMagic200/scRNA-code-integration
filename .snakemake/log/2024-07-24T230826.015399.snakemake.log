@@ -1,0 +1,23 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count
+-----  -------
+all          1
+total        1
+
+Select jobs to execute...
+
+[Wed Jul 24 23:08:26 2024]
+rule all:
+    input: data/processed/seurat/01_read_data.rds, data/processed/scanpy/01_read_data.h5ad
+    jobid: 0
+    reason: Rules with a run or shell declaration but no output are always executed.
+    resources: tmpdir=/tmp
+
+[Wed Jul 24 23:08:26 2024]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2024-07-24T230826.015399.snakemake.log

@@ -1,0 +1,37 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count
+---------------------  -------
+scanpy_postQC_process        1
+total                        1
+
+Select jobs to execute...
+
+[Thu Jul 25 08:40:59 2024]
+rule scanpy_postQC_process:
+    input: data/processed/scanpy/04_doublet_detected_data.h5ad
+    output: data/processed/scanpy/05_postQC_processed_data.h5ad
+    log: logs/scanpy/05_postQC_process.log
+    jobid: 0
+    reason: Missing output files: data/processed/scanpy/05_postQC_processed_data.h5ad
+    resources: tmpdir=/tmp
+
+/opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmpiy1ndmdx.05_postQC_process.py
+[Thu Jul 25 08:40:59 2024]
+Error in rule scanpy_postQC_process:
+    jobid: 0
+    input: data/processed/scanpy/04_doublet_detected_data.h5ad
+    output: data/processed/scanpy/05_postQC_processed_data.h5ad
+    log: logs/scanpy/05_postQC_process.log (check log file(s) for error details)
+
+RuleException:
+CalledProcessError in file /mnt/exfat01/projects/scRNA-0722/scanpy.smk, line 61:
+Command 'set -euo pipefail;  /opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmpiy1ndmdx.05_postQC_process.py' returned non-zero exit status 1.
+  File "/mnt/exfat01/projects/scRNA-0722/scanpy.smk", line 61, in __rule_scanpy_postQC_process
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-25T084058.952575.snakemake.log

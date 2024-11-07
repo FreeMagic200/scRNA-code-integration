@@ -1,0 +1,53 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count
+---------------------  -------
+seurat_doublet_finder        1
+seurat_qc_filter             1
+total                        2
+
+Select jobs to execute...
+
+[Wed Jul 24 20:32:44 2024]
+rule seurat_qc_filter:
+    input: data/processed/seurat/02_normalized_data.rds
+    output: data/processed/seurat/03_filtered_data.rds
+    log: logs/seurat/03_qc_filter.log
+    jobid: 1
+    reason: Params have changed since last execution
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmp68vbghq7.03_qc_filter.R
+[Wed Jul 24 20:39:10 2024]
+Finished job 1.
+1 of 2 steps (50%) done
+Select jobs to execute...
+
+[Wed Jul 24 20:39:10 2024]
+rule seurat_doublet_finder:
+    input: data/processed/seurat/03_filtered_data.rds
+    output: data/processed/seurat/04_doublet_data.rds
+    log: logs/seurat/04_doublet_finder.log
+    jobid: 0
+    reason: Input files updated by another job: data/processed/seurat/03_filtered_data.rds
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmphpjftonr.04_doublet_finder.R
+[Wed Jul 24 21:12:50 2024]
+Error in rule seurat_doublet_finder:
+    jobid: 0
+    input: data/processed/seurat/03_filtered_data.rds
+    output: data/processed/seurat/04_doublet_data.rds
+    log: logs/seurat/04_doublet_finder.log (check log file(s) for error details)
+
+RuleException:
+CalledProcessError in file /mnt/exfat01/projects/scRNA-0722/seurat.smk, line 52:
+Command 'set -euo pipefail;  Rscript --vanilla /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmphpjftonr.04_doublet_finder.R' returned non-zero exit status 1.
+  File "/mnt/exfat01/projects/scRNA-0722/seurat.smk", line 52, in __rule_seurat_doublet_finder
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-24T203243.794986.snakemake.log

@@ -1,0 +1,4 @@
+TypeError in file /mnt/exfat01/projects/scRNA-0722/seurat.smk, line 32:
+list indices must be integers or slices, not str
+  File "/mnt/exfat01/projects/scRNA-0722/Snakefile", line 11, in <module>
+  File "/mnt/exfat01/projects/scRNA-0722/seurat.smk", line 32, in <module>

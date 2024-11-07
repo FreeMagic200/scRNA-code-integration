@@ -1,0 +1,27 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count
+---------------------  -------
+seurat_doublet_finder        1
+seurat_normalize_stat        1
+seurat_qc_filter             1
+seurat_read_data             1
+total                        4
+
+Select jobs to execute...
+
+[Thu Aug 22 16:05:12 2024]
+rule seurat_read_data:
+    input: data/raw/seurat_input.rds
+    output: data/processed/seurat/01_read_data.rds
+    log: logs/seurat/01_read_data.log
+    jobid: 3
+    reason: Missing output files: data/processed/seurat/01_read_data.rds
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722-Reviewed/.snakemake/scripts/tmp_eny8mwd.01_read_data.R
+Terminating processes on user request, this might take some time.
+Cancelling snakemake on user request.

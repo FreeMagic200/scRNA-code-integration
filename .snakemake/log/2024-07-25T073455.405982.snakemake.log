@@ -1,0 +1,37 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+scanpy_qc_filter        1
+total                   1
+
+Select jobs to execute...
+
+[Thu Jul 25 07:34:55 2024]
+rule scanpy_qc_filter:
+    input: data/processed/scanpy/02_normalized_data.h5ad
+    output: data/processed/scanpy/03_qc_filtered_data.h5ad
+    log: logs/scanpy/03_qc_filter.log
+    jobid: 0
+    reason: Missing output files: data/processed/scanpy/03_qc_filtered_data.h5ad
+    resources: tmpdir=/tmp
+
+/opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmpp47mi5gh.03_qc_filter.py
+[Thu Jul 25 07:35:06 2024]
+Error in rule scanpy_qc_filter:
+    jobid: 0
+    input: data/processed/scanpy/02_normalized_data.h5ad
+    output: data/processed/scanpy/03_qc_filtered_data.h5ad
+    log: logs/scanpy/03_qc_filter.log (check log file(s) for error details)
+
+RuleException:
+CalledProcessError in file /mnt/exfat01/projects/scRNA-0722/scanpy.smk, line 36:
+Command 'set -euo pipefail;  /opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmpp47mi5gh.03_qc_filter.py' returned non-zero exit status 1.
+  File "/mnt/exfat01/projects/scRNA-0722/scanpy.smk", line 36, in __rule_scanpy_qc_filter
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-25T073455.405982.snakemake.log

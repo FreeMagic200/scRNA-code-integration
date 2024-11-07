@@ -1,0 +1,212 @@
+library(ComplexHeatmap)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+
+ldsc_data <- read_csv("./prioritization.csv")
+
+# anno9_index_correspondence<-read.csv("../../../anno9_index_correspondence.csv")
+
+# 筛选 p < 0.05 的数据
+# filtered_data <- ldsc_data %>%
+#   filter(pvalue < 0.05)
+
+# 确保每个 gwas 和 annotation 组合都存在，缺失的 beta 填充为 0
+# complete_data <- ldsc_data %>%
+#   complete(gwas, annotation, fill = list(beta = 0, pvalue = 1))
+# 
+# # 在 gwas 层级上对 beta 进行标准化
+# standardized_data <- complete_data %>%
+#   group_by(gwas) %>%
+#   mutate(beta_std = scale(beta)[,1]) %>%  # scale() 返回一个矩阵，我们只需要第一列
+#   ungroup()
+
+# 确保 annotation 是数值型，并按数字大小排序
+# ldsc_data <- ldsc_data %>%
+#   mutate(annotation = as.numeric(annotation)) %>%
+#   arrange(annotation)
+
+# # 对 GWAS 按字母顺序排序
+# # gwas_order <- sort(unique(ldsc_data$gwas))
+# ldsc_data <- subset(ldsc_data, grepl("BMI", gwas, ignore.case = TRUE) | 
+#                                grepl("obesity", gwas, ignore.case = TRUE))
+# 
+# 
+# 
+# # 将 anno9_index_correspondence 中的 annotation 和 anno9_index 对应到 standardized_data
+# ldsc_data <- ldsc_data %>%
+#   left_join(anno9_index_correspondence, by = c("annotation" = "anno9_index"))
+
+# 根据 ldsc_data$annotation 对数据框进行排序
+ldsc_data <- ldsc_data[order(ldsc_data$annotation), ]
+
+# 使用 anno9 替换原有的 annotation 列
+# ldsc_data$annotation <- ldsc_data$anno9
+
+# 计算 -log10(p值) 并添加显著性标记
+ldsc_data <- ldsc_data %>% 
+  mutate(log_pvalue = -log10(pvalue),
+         sig = case_when(
+           pvalue < 0.001 ~ "***",
+           pvalue < 0.01 ~ "**",
+           pvalue < 0.05 ~ "*",
+           TRUE ~ ""
+         ),
+         p_value_text = case_when(
+           pvalue < 0.001 ~ sprintf("%.2e", pvalue),
+           TRUE ~ sprintf("%.3f", pvalue)
+         ))
+
+
+# 加载必要的库
+# 加载必要的库
+library(pheatmap)
+library(reshape2)
+
+# 转换数据框为矩阵
+data_matrix <- dcast(ldsc_data, annotation ~ gwas, value.var = "log_pvalue")
+
+# 将行名设为 annotation 列
+rownames(data_matrix) <- data_matrix$annotation
+data_matrix <- data_matrix[, -1]
+
+# 创建与data_matrix形状一致的显著性矩阵
+sig_matrix <- dcast(ldsc_data, annotation ~ gwas, value.var = "pvalue")
+rownames(sig_matrix) <- sig_matrix$annotation
+sig_matrix <- sig_matrix[, -1]
+
+# 将p值转换为显著性符号
+sig_matrix <- ifelse(sig_matrix < 0.05, "*", "")
+
+# 设置保存的文件名和图片大小
+png("heatmap-pval.png", width = 4000, height = 6000,res = 300)
+
+# 生成热图
+pheatmap(data_matrix,
+         color = colorRampPalette(c("white", "#FFCCCC", "#FF6666", "#990000"))(100),  # 精细的颜色梯度
+         cluster_rows = TRUE,  # 可以选择聚类行
+         cluster_cols = TRUE,  # 可以选择聚类列
+         display_numbers = sig_matrix,  # 显示显著性符号（*）
+         number_color = "black",  # 显示符号的颜色
+         fontsize_number = 10,  # 数字的字体大小
+         border_color = "grey60",  # 单元格边框颜色
+         fontsize_row = 10,  # 行标签的字体大小
+         fontsize_col = 10,  # 列标签的字体大小
+         angle_col = 45,  # 列标签的角度
+         main = "GWAS p value (-log10 p)",
+         cellwidth = 20,  # 单元格宽度
+         cellheight = 20,  # 单元格高度
+         legend_breaks = seq(min(ldsc_data$log_pvalue), max(ldsc_data$log_pvalue), length.out = 5),  # 调整图例的断点
+         legend_labels = round(seq(min(ldsc_data$log_pvalue), max(ldsc_data$log_pvalue), length.out = 5), 2))  # 图例标签
+
+dev.off()
+
+# 转换数据框为矩阵，使用 beta 值
+beta_matrix <- dcast(ldsc_data, annotation ~ gwas, value.var = "beta")
+
+# 将行名设为 annotation 列
+rownames(beta_matrix) <- beta_matrix$annotation
+beta_matrix <- beta_matrix[, -1]
+
+# 创建与 beta_matrix 形状一致的显著性矩阵
+sig_matrix_beta <- dcast(ldsc_data, annotation ~ gwas, value.var = "pvalue")
+rownames(sig_matrix_beta) <- sig_matrix_beta$annotation
+sig_matrix_beta <- sig_matrix_beta[, -1]
+
+# 将p值转换为显著性符号
+sig_matrix_beta <- ifelse(sig_matrix_beta < 0.05, "*", "")
+
+png("heatmap-beta.png", width = 4000, height = 6000,res = 300)
+
+# 生成 beta 值热图
+pheatmap(beta_matrix,
+         color = colorRampPalette(c("blue", "white", "red"))(100),  # 蓝-白-红颜色梯度
+         cluster_rows = TRUE,  # 可以选择聚类行
+         cluster_cols = TRUE,  # 可以选择聚类列
+         display_numbers = sig_matrix_beta,  # 显示显著性符号（*）
+         number_color = "black",  # 显示符号的颜色
+         fontsize_number = 10,  # 数字的字体大小
+         border_color = "grey60",  # 单元格边框颜色
+         fontsize_row = 10,  # 行标签的字体大小
+         fontsize_col = 10,  # 列标签的字体大小
+         angle_col = 45,  # 列标签的角度
+         main = "GWAS beta value",
+         cellwidth = 20,  # 单元格宽度
+         cellheight = 20,  # 单元格高度
+         legend_breaks = seq(min(ldsc_data$beta), max(ldsc_data$beta), length.out = 5),  # 调整图例的断点
+         legend_labels = round(seq(min(ldsc_data$beta), max(ldsc_data$beta), length.out = 5), 2))  # 图例标签
+
+dev.off()
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # 创建热图
+# ggplot(ldsc_data, aes(x = factor(gwas, levels = unique(gwas)), 
+#                       y = factor(annotation, levels = unique(annotation)), 
+#                       fill = log_pvalue)) +
+#   geom_tile() +
+#   scale_fill_gradient2(low = "white", high = "red", 
+#                        midpoint = -log10(0.05), 
+#                        limit = c(min(ldsc_data$log_pvalue), max(ldsc_data$log_pvalue)), 
+#                        space = "Lab", name="-log10(p-value)") +
+#   # geom_text(aes(label = ifelse(pvalue < 0.05, sig, "")), 
+#             # color = "black", size = 2.5, vjust = 0.5) +
+#   theme_minimal() +
+#   theme(axis.text.x = element_text(hjust = 1, size = 8, angle = 90),
+#         axis.text.y = element_text(size = 8),
+#         axis.title.x = element_blank(),
+#         axis.title.y = element_blank()) +
+#   labs(title = "GWAS and Annotation Heatmap",
+#        x = "GWAS",
+#        y = "Annotation") +
+#   coord_flip()
+# 
+# # 保存图片
+# ggsave("ldsc_heatmap_by_annotation_gwas.png", width = 15, height = 12)
+
+# 
+# 
+# library(corrplot)
+# 
+# # 筛选含有 BMI 和 obesity 字段的 GWAS
+# bmi_obesity_data <- ldsc_data %>%
+#   filter(grepl("BMI|obesity", gwas, ignore.case = TRUE))
+# 
+# # 将数据转换为宽格式，每个 GWAS 作为一列，annotation 作为行
+# wide_data <- bmi_obesity_data %>%
+#   select(gwas, annotation, beta) %>%
+#   pivot_wider(names_from = gwas, values_from = beta, values_fill = 0)
+# 
+# # 计算相关性矩阵
+# cor_matrix <- cor(wide_data[,-1], use = "pairwise.complete.obs")
+# 
+# # 绘制相关性热图
+# png("bmi_obesity_gwas_correlation.png", width = 1000, height = 900, res = 100)
+# par(mar = c(2, 2, 4, 2))  # 调整边距
+# corrplot(cor_matrix, 
+#          method = "color", 
+#          type = "upper", 
+#          tl.col = "black", 
+#          tl.srt = 45, 
+#          tl.cex = 0.7,    # 调整标签字体大小
+#          cl.cex = 0.7,    # 调整图例字体大小
+#          addCoef.col = "black",  # 添加相关系数
+#          number.cex = 0.6,  # 调整相关系数字体大小
+#          mar = c(0, 0, 1, 0))  # 调整 corrplot 的内部边距
+# 
+# # 添加标题
+# title("Correlation of BMI and Obesity related GWAS", 
+#       line = 0.5,  # 调整标题位置
+#       cex.main = 1.2)  # 调整标题字体大小
+# 
+# dev.off()

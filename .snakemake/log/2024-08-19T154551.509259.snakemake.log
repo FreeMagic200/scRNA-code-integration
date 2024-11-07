@@ -1,0 +1,37 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+seurat_integrate        1
+total                   1
+
+Select jobs to execute...
+
+[Mon Aug 19 15:45:51 2024]
+rule seurat_integrate:
+    input: data/processed/seurat/05_postQC_data.rds
+    output: data/processed/seurat/06_integrated_data.rds
+    log: logs/seurat/06_integrate.log
+    jobid: 0
+    reason: Missing output files: data/processed/seurat/06_integrated_data.rds
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722-ReQC/.snakemake/scripts/tmpc503xzzd.06_integrate.R
+[Mon Aug 19 18:18:15 2024]
+Error in rule seurat_integrate:
+    jobid: 0
+    input: data/processed/seurat/05_postQC_data.rds
+    output: data/processed/seurat/06_integrated_data.rds
+    log: logs/seurat/06_integrate.log (check log file(s) for error details)
+
+RuleException:
+CalledProcessError in file /mnt/data/projects/scRNA-0722-ReQC/seurat.smk, line 76:
+Command 'set -euo pipefail;  Rscript --vanilla /mnt/data/projects/scRNA-0722-ReQC/.snakemake/scripts/tmpc503xzzd.06_integrate.R' returned non-zero exit status 1.
+  File "/mnt/data/projects/scRNA-0722-ReQC/seurat.smk", line 76, in __rule_seurat_integrate
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-08-19T154551.509259.snakemake.log

@@ -1,0 +1,3 @@
+WorkflowError in file /mnt/exfat01/projects/scRNA-0722/workflow/Snakefile, line 1:
+Workflow defines configfile ../config/config.yaml but it is not present or accessible (full checked path: /mnt/exfat01/projects/config/config.yaml).
+  File "/mnt/exfat01/projects/scRNA-0722/workflow/Snakefile", line 1, in <module>

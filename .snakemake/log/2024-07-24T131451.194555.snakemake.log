@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule all in file /mnt/exfat01/projects/scRNA-0722/workflow/Snakefile, line 3:
+Missing input files for rule all:
+    affected files:
+        results/scanpy/01_read_data.h5ad
+        results/seurat/01_read_data.rds

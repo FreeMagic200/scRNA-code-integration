@@ -1,0 +1,26 @@
+{
+    "id": "711A9E55",
+    "path": "~/data/projects/scRNA-0722-Reviewed/data/processed/seurat/30d/07_UMAP_clustering_annotation.R",
+    "project_path": "data/processed/seurat/30d/07_UMAP_clustering_annotation.R",
+    "type": "r_source",
+    "hash": "2576973786",
+    "contents": "",
+    "dirty": false,
+    "created": 1725954113399.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "307,0",
+        "scrollLine": "295"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1725602240,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1725602240,
+    "read_only": false,
+    "read_only_alternatives": []
+}

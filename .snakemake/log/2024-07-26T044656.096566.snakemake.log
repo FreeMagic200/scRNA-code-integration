@@ -1,0 +1,42 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 15
+Rules claiming more threads will be scaled down.
+Job stats:
+job                         count
+------------------------  -------
+scanpy_doublet_detection        1
+scanpy_integrate                1
+scanpy_normalize_data           1
+scanpy_postQC_process           1
+scanpy_qc_filter                1
+scanpy_read_data                1
+total                           6
+
+Select jobs to execute...
+
+[Fri Jul 26 04:46:56 2024]
+rule scanpy_read_data:
+    input: data/raw/scanpy_input.h5ad
+    output: data/processed/scanpy/01_read_data.h5ad
+    log: logs/scanpy/01_read_data.log
+    jobid: 5
+    reason: Missing output files: data/processed/scanpy/01_read_data.h5ad; Updated input files: data/raw/scanpy_input.h5ad
+    resources: tmpdir=/tmp
+
+/opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmpqendshp5.01_read_data.py
+[Fri Jul 26 04:46:58 2024]
+Error in rule scanpy_read_data:
+    jobid: 5
+    input: data/raw/scanpy_input.h5ad
+    output: data/processed/scanpy/01_read_data.h5ad
+    log: logs/scanpy/01_read_data.log (check log file(s) for error details)
+
+RuleException:
+CalledProcessError in file /mnt/exfat01/projects/scRNA-0722/scanpy.smk, line 11:
+Command 'set -euo pipefail;  /opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmpqendshp5.01_read_data.py' returned non-zero exit status 1.
+  File "/mnt/exfat01/projects/scRNA-0722/scanpy.smk", line 11, in __rule_scanpy_read_data
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-26T044656.096566.snakemake.log

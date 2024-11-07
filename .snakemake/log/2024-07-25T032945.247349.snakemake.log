@@ -1,0 +1,26 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                         count
+------------------------  -------
+scanpy_doublet_detection        1
+total                           1
+
+Select jobs to execute...
+
+[Thu Jul 25 03:29:45 2024]
+rule scanpy_doublet_detection:
+    input: data/processed/scanpy/03_qc_filtered_data.h5ad
+    output: data/processed/scanpy/04_doublet_detected_data.h5ad
+    log: logs/scanpy/04_doublet_detection.log
+    jobid: 0
+    reason: Missing output files: data/processed/scanpy/04_doublet_detected_data.h5ad
+    resources: tmpdir=/tmp
+
+/opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmpnhs9v0bq.04_doublet_detection.py
+[Thu Jul 25 03:41:41 2024]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2024-07-25T032945.247349.snakemake.log

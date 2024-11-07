@@ -1,0 +1,22 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count
+-----  -------
+all          1
+total        1
+
+Select jobs to execute...
+
+[Wed Jul 24 16:42:17 2024]
+rule all:
+    output: data/processed/seurat/01_read_data.rds, data/processed/scanpy/01_read_data.h5ad
+    jobid: 0
+    reason: Missing output files: data/processed/seurat/01_read_data.rds, data/processed/scanpy/01_read_data.h5ad
+    resources: tmpdir=/tmp
+
+RuleException in rule all in file /mnt/exfat01/projects/scRNA-0722/Snakefile, line 3:
+AttributeError: 'InputFiles' object has no attribute 'seurat_data', when formatting the following:
+echo Seurat data: {input.seurat_data}echo Scanpy data: {input.scanpy_data}

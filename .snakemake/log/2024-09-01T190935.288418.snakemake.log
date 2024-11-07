@@ -1,0 +1,26 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count
+---------------------  -------
+seurat_doublet_finder        1
+seurat_integrate             1
+seurat_postQC_process        1
+total                        3
+
+Select jobs to execute...
+
+[Sun Sep  1 19:09:36 2024]
+rule seurat_doublet_finder:
+    input: data/processed/seurat/03_filtered_data.rds
+    output: data/processed/seurat/04_doublet_data.rds
+    log: logs/seurat/04_doublet_finder.log
+    jobid: 2
+    reason: Missing output files: data/processed/seurat/04_doublet_data.rds; Params have changed since last execution
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722-Reviewed/.snakemake/scripts/tmp0xz9mpqg.04_doublet_finder.R
+Terminating processes on user request, this might take some time.
+Cancelling snakemake on user request.

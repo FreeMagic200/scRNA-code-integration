@@ -1,0 +1,27 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count
+---------------------  -------
+seurat_doublet_finder        1
+seurat_integrate             1
+seurat_postQC_process        1
+seurat_qc_filter             1
+total                        4
+
+Select jobs to execute...
+
+[Wed Aug  7 09:47:26 2024]
+rule seurat_qc_filter:
+    input: data/processed/seurat/02_normalized_data.rds
+    output: data/processed/seurat/03_filtered_data.rds
+    log: logs/seurat/03_qc_filter.log
+    jobid: 3
+    reason: Code has changed since last execution; Params have changed since last execution
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722/.snakemake/scripts/tmp6qk5i4l6.03_qc_filter.R
+Terminating processes on user request, this might take some time.
+Cancelling snakemake on user request.

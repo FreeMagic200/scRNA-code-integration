@@ -1,0 +1,3 @@
+SyntaxError in file /mnt/exfat01/projects/scRNA-0722/scanpy.smk, line 6:
+invalid syntax
+  File "/mnt/exfat01/projects/scRNA-0722/Snakefile", line 12, in <module>

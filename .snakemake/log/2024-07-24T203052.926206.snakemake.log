@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule seurat_doublet_finder in file /mnt/exfat01/projects/scRNA-0722/seurat.smk, line 38:
+Missing input files for rule seurat_doublet_finder:
+    output: data/processed/seurat/04_doublet_data.rds
+    affected files:
+        data/processed/seurat/03_qc_data.rds

@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule scanpy_read_data in file /mnt/exfat01/projects/scRNA-0722/workflow/rules/scanpy.smk, line 7:
+Missing input files for rule scanpy_read_data:
+    output: data/processed/scanpy/01_read_data.h5ad
+    affected files:
+        data/raw/scanpy_input.h5ad

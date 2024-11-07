@@ -1,0 +1,26 @@
+{
+    "id": "FD67AF3F",
+    "path": "~/data/projects/scRNA-0722-Reviewed/data/processed/seurat/nexpoi/markers.R",
+    "project_path": "data/processed/seurat/nexpoi/markers.R",
+    "type": "r_source",
+    "hash": "2428393282",
+    "contents": "",
+    "dirty": false,
+    "created": 1725589049890.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "114,3",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1725178371,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1725178371,
+    "read_only": false,
+    "read_only_alternatives": []
+}

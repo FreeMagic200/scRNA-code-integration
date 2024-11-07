@@ -1,0 +1,37 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+all                     1
+seurat_read_data        1
+total                   2
+
+Select jobs to execute...
+
+[Wed Jul 24 18:51:56 2024]
+rule seurat_read_data:
+    input: data/raw/seurat_input.rds
+    output: data/processed/seurat/01_read_data.rds
+    log: logs/seurat/01_read_data.log
+    jobid: 1
+    reason: Missing output files: data/processed/seurat/01_read_data.rds
+    resources: tmpdir=/tmp
+
+[Wed Jul 24 18:52:34 2024]
+Error in rule seurat_read_data:
+    jobid: 1
+    input: data/raw/seurat_input.rds
+    output: data/processed/seurat/01_read_data.rds
+    log: logs/seurat/01_read_data.log (check log file(s) for error details)
+
+RuleException:
+CalledProcessError in file /mnt/exfat01/projects/scRNA-0722/seurat.smk, line 12:
+Command 'set -euo pipefail;  Rscript --vanilla /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmpwdbb9z22.01_read_data.R' returned non-zero exit status 1.
+  File "/mnt/exfat01/projects/scRNA-0722/seurat.smk", line 12, in __rule_seurat_read_data
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-24T185156.177617.snakemake.log

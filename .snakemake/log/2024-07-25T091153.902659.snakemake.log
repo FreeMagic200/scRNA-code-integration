@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule scanpy_integrate in file /mnt/exfat01/projects/scRNA-0722/scanpy.smk, line 64:
+Missing input files for rule scanpy_integrate:
+    output: data/06_integrated.h5ad
+    affected files:
+        data/05_postQC_processed_data.h5ad

@@ -1,0 +1,26 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+seurat_integrate        1
+total                   1
+
+Select jobs to execute...
+
+[Tue Aug 20 01:07:50 2024]
+rule seurat_integrate:
+    input: data/processed/seurat/05_postQC_data.rds
+    output: data/processed/seurat/06_integrated_data.rds
+    log: logs/seurat/06_integrate.log
+    jobid: 0
+    reason: Missing output files: data/processed/seurat/06_integrated_data.rds
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722-ReQC/.snakemake/scripts/tmpq6erlcpx.06_integrate.R
+[Tue Aug 20 04:30:20 2024]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2024-08-20T010750.313761.snakemake.log

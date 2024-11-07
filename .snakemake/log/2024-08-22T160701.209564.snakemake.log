@@ -1,0 +1,85 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count
+---------------------  -------
+seurat_doublet_finder        1
+seurat_normalize_stat        1
+seurat_qc_filter             1
+seurat_read_data             1
+total                        4
+
+Select jobs to execute...
+
+[Thu Aug 22 16:07:01 2024]
+rule seurat_read_data:
+    input: data/raw/seurat_input.rds
+    output: data/processed/seurat/01_read_data.rds
+    log: logs/seurat/01_read_data.log
+    jobid: 3
+    reason: Missing output files: data/processed/seurat/01_read_data.rds
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722-Reviewed/.snakemake/scripts/tmpw3n393h2.01_read_data.R
+[Thu Aug 22 16:09:52 2024]
+Finished job 3.
+1 of 4 steps (25%) done
+Select jobs to execute...
+
+[Thu Aug 22 16:09:52 2024]
+rule seurat_normalize_stat:
+    input: data/processed/seurat/01_read_data.rds
+    output: data/processed/seurat/02_normalized_stat.rds
+    log: logs/seurat/02_normalized_stat.log
+    jobid: 2
+    reason: Missing output files: data/processed/seurat/02_normalized_stat.rds; Input files updated by another job: data/processed/seurat/01_read_data.rds
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722-Reviewed/.snakemake/scripts/tmpolij7eur.02_normalize_stat.R
+[Thu Aug 22 16:15:39 2024]
+Finished job 2.
+2 of 4 steps (50%) done
+Select jobs to execute...
+
+[Thu Aug 22 16:15:39 2024]
+rule seurat_qc_filter:
+    input: data/processed/seurat/02_normalized_stat.rds
+    output: data/processed/seurat/03_filtered_data.rds
+    log: logs/seurat/03_qc_filter.log
+    jobid: 1
+    reason: Missing output files: data/processed/seurat/03_filtered_data.rds; Input files updated by another job: data/processed/seurat/02_normalized_stat.rds; Set of input files has changed since last execution; Params have changed since last execution
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722-Reviewed/.snakemake/scripts/tmpfyrlx5p8.03_qc_filter.R
+[Thu Aug 22 16:20:46 2024]
+Finished job 1.
+3 of 4 steps (75%) done
+Select jobs to execute...
+
+[Thu Aug 22 16:20:46 2024]
+rule seurat_doublet_finder:
+    input: data/processed/seurat/03_filtered_data.rds
+    output: data/processed/seurat/04_doublet_data.rds
+    log: logs/seurat/04_doublet_finder.log
+    jobid: 0
+    reason: Input files updated by another job: data/processed/seurat/03_filtered_data.rds
+    resources: tmpdir=/tmp
+
+Rscript --vanilla /mnt/data/projects/scRNA-0722-Reviewed/.snakemake/scripts/tmpu_de8uyt.04_doublet_finder.R
+[Thu Aug 22 16:21:26 2024]
+Error in rule seurat_doublet_finder:
+    jobid: 0
+    input: data/processed/seurat/03_filtered_data.rds
+    output: data/processed/seurat/04_doublet_data.rds
+    log: logs/seurat/04_doublet_finder.log (check log file(s) for error details)
+
+RuleException:
+CalledProcessError in file /mnt/data/projects/scRNA-0722-Reviewed/seurat.smk, line 53:
+Command 'set -euo pipefail;  Rscript --vanilla /mnt/data/projects/scRNA-0722-Reviewed/.snakemake/scripts/tmpu_de8uyt.04_doublet_finder.R' returned non-zero exit status 1.
+  File "/mnt/data/projects/scRNA-0722-Reviewed/seurat.smk", line 53, in __rule_seurat_doublet_finder
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-08-22T160701.209564.snakemake.log

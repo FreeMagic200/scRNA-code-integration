@@ -1,0 +1,4 @@
+NameError in file /mnt/exfat01/projects/scRNA-0722/workflow/rules/seurat.smk, line 1:
+name 'Seurat特定参数' is not defined
+  File "/mnt/exfat01/projects/scRNA-0722/workflow/Snakefile", line 9, in <module>
+  File "/mnt/exfat01/projects/scRNA-0722/workflow/rules/seurat.smk", line 1, in <module>

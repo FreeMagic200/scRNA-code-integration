@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule seurat_read_data in file /mnt/exfat01/projects/scRNA-0722/workflow/rules/seurat.smk, line 7:
+Missing input files for rule seurat_read_data:
+    output: data/processed/seurat/01_read_data.rds
+    affected files:
+        data/raw/seurat_input.rds

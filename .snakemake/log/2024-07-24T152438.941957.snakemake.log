@@ -1,0 +1,36 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+seurat_read_data        1
+total                   1
+
+Select jobs to execute...
+
+[Wed Jul 24 15:24:39 2024]
+rule seurat_read_data:
+    input: data/raw/seurat_input.rds
+    output: data/processed/seurat/01_read_data.rds
+    log: logs/seurat/01_read_data.log
+    jobid: 0
+    reason: Missing output files: data/processed/seurat/01_read_data.rds
+    resources: tmpdir=/tmp
+
+[Wed Jul 24 15:24:39 2024]
+Error in rule seurat_read_data:
+    jobid: 0
+    input: data/raw/seurat_input.rds
+    output: data/processed/seurat/01_read_data.rds
+    log: logs/seurat/01_read_data.log (check log file(s) for error details)
+
+RuleException:
+NameError in file /mnt/exfat01/projects/scRNA-0722/workflow/rules/seurat.smk, line 15:
+The name 'input' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}
+  File "/mnt/exfat01/projects/scRNA-0722/workflow/rules/seurat.smk", line 15, in __rule_seurat_read_data
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-24T152438.941957.snakemake.log

@@ -1,0 +1,4 @@
+KeyError in file /mnt/exfat01/projects/scRNA-0722/scanpy.smk, line 46:
+'batch_key'
+  File "/mnt/exfat01/projects/scRNA-0722/Snakefile", line 12, in <module>
+  File "/mnt/exfat01/projects/scRNA-0722/scanpy.smk", line 46, in <module>

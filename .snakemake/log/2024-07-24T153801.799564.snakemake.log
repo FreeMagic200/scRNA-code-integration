@@ -1,0 +1,4 @@
+WorkflowError in file /mnt/exfat01/projects/scRNA-0722/workflow/Snakefile, line 9:
+Failed to open source file /mnt/exfat01/projects/scRNA-0722/workflow/workflow/rules/seurat.smk
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/exfat01/projects/scRNA-0722/workflow/workflow/rules/seurat.smk'
+  File "/mnt/exfat01/projects/scRNA-0722/workflow/Snakefile", line 9, in <module>

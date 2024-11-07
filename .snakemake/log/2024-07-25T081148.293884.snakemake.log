@@ -1,0 +1,69 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job                         count
+------------------------  -------
+scanpy_doublet_detection        1
+scanpy_postQC_process           1
+scanpy_qc_filter                1
+total                           3
+
+Select jobs to execute...
+
+[Thu Jul 25 08:11:48 2024]
+rule scanpy_qc_filter:
+    input: data/processed/scanpy/02_normalized_data.h5ad
+    output: data/processed/scanpy/03_qc_filtered_data.h5ad
+    log: logs/scanpy/03_qc_filter.log
+    jobid: 2
+    reason: Missing output files: data/processed/scanpy/03_qc_filtered_data.h5ad
+    resources: tmpdir=/tmp
+
+/opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmpwoelwd36.03_qc_filter.py
+[Thu Jul 25 08:11:59 2024]
+Finished job 2.
+1 of 3 steps (33%) done
+Select jobs to execute...
+
+[Thu Jul 25 08:11:59 2024]
+rule scanpy_doublet_detection:
+    input: data/processed/scanpy/03_qc_filtered_data.h5ad
+    output: data/processed/scanpy/04_doublet_detected_data.h5ad
+    log: logs/scanpy/04_doublet_detection.log
+    jobid: 1
+    reason: Input files updated by another job: data/processed/scanpy/03_qc_filtered_data.h5ad; Code has changed since last execution; Params have changed since last execution
+    resources: tmpdir=/tmp
+
+/opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmpp_25dw4b.04_doublet_detection.py
+[Thu Jul 25 08:12:38 2024]
+Finished job 1.
+2 of 3 steps (67%) done
+Select jobs to execute...
+
+[Thu Jul 25 08:12:38 2024]
+rule scanpy_postQC_process:
+    input: data/processed/scanpy/04_doublet_detected_data.h5ad
+    output: data/processed/scanpy/05_postQC_processed_data.h5ad
+    log: logs/scanpy/05_postQC_process.log
+    jobid: 0
+    reason: Input files updated by another job: data/processed/scanpy/04_doublet_detected_data.h5ad
+    resources: tmpdir=/tmp
+
+/opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmp0jonj2_3.05_postQC_process.py
+[Thu Jul 25 08:12:42 2024]
+Error in rule scanpy_postQC_process:
+    jobid: 0
+    input: data/processed/scanpy/04_doublet_detected_data.h5ad
+    output: data/processed/scanpy/05_postQC_processed_data.h5ad
+    log: logs/scanpy/05_postQC_process.log (check log file(s) for error details)
+
+RuleException:
+CalledProcessError in file /mnt/exfat01/projects/scRNA-0722/scanpy.smk, line 61:
+Command 'set -euo pipefail;  /opt/miniforge3/envs/scanpy/bin/python3.9 /mnt/exfat01/projects/scRNA-0722/.snakemake/scripts/tmp0jonj2_3.05_postQC_process.py' returned non-zero exit status 1.
+  File "/mnt/exfat01/projects/scRNA-0722/scanpy.smk", line 61, in __rule_scanpy_postQC_process
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-25T081148.293884.snakemake.log

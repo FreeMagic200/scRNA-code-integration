@@ -1,0 +1,26 @@
+{
+    "id": "F7B056EC",
+    "path": "~/data/projects/scRNA-0722-Reviewed/data/processed/seurat/30d/umaps_of_reductions.R",
+    "project_path": "data/processed/seurat/30d/umaps_of_reductions.R",
+    "type": "r_source",
+    "hash": "2790638839",
+    "contents": "",
+    "dirty": false,
+    "created": 1725602447772.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "10,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1725602594,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1725602594840,
+    "read_only": false,
+    "read_only_alternatives": []
+}

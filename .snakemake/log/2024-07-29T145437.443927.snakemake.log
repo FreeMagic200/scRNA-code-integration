@@ -1,0 +1,6 @@
+PermissionError in file /mnt/data/projects/scRNA-0722/Snakefile, line 2:
+[Errno 13] Permission denied: '/mnt/exfat01'
+  File "/mnt/data/projects/scRNA-0722/Snakefile", line 2, in <module>
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/os.py", line 215, in makedirs
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/os.py", line 215, in makedirs
+  File "/opt/miniforge3/envs/scanpy/lib/python3.9/os.py", line 225, in makedirs
